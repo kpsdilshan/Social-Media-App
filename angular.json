@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "MEAN-Social-Media-App"
+    }
+  },
+  "defaultProject": "MEAN-Social-Media-App",
+  "cli": {
+    "analytics": "a207e5b4-bd2e-4064-9649-cd9bd13aa70d"
+  }
 }
