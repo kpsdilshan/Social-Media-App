@@ -54,4 +54,11 @@ app.get('/api/posts', (req, res, next)=>{
   })
 })
 
+app.get('/api', (req, res, next)=>{
+
+  res.status(200).json({
+    message: 'Posts fetching successfully',
+  })
+})
+
 module.exports = app
