@@ -1,11 +1,7 @@
 <p>
   <mat-toolbar color="primary">
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <a routerLink="/">Home</a>
-  </button>
-  <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <a routerLink="/create">Add Post  </a>
-  </button>
-</mat-toolbar>
+    <span><a routerLink='/' class="logo">All  Posts</a></span>
+    <span class="example-spacer"></span>
+    <button class="new-post" mat-flat-button color="primary" ><a routerLink='./create' class="newPost" routerLinkActive="">New Post</a></button>
+  </mat-toolbar>
 </p>

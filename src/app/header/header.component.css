@@ -1,3 +1,18 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.logo{
+  color: aliceblue;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+  color: aliceblue;
+}
+
+button :hover {
+  color: aquamarine;
+}
+
