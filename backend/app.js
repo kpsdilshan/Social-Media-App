@@ -22,14 +22,9 @@ app.use(bodyParser.urlencoded({extended : false}))
 
 app.use((req, res, next)=>{
   res.setHeader("Access-Control-Allow-Origin","*")
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  )
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, DELETE, OPTIONS"
-  )
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  res.setHeader('Access-Control-Allow-Credentials', 'true')
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS")
   next()
 })
 
@@ -38,36 +33,32 @@ app.post('/api/posts',(req, res, next)=> {
     title: req.body.title,
     content: req.body.content
   })
-  post.save()
-  console.log(post)
-  res.status(201).json({
-    message: "post added successfully"
+  post.save().then((createdPost)=>{
+    console.log(createdPost);
+    res.status(201).json({
+      message: "post added successfully",
+      postId : createdPost._id
+    })
   })
+
 })
 
 
 app.get('/api/posts', (req, res, next)=>{
-  const posts =[
-    {
-      id: "wa123bsdva",
-      title: "First server side post",
-      content: "This is my first server side post"
-    },
-    {
-      id: "wa123bsdva",
-      title: "Second server side post",
-      content: "This is my first server side post"
-    },
-    {
-      id: "ss31wffeesssf",
-      title: "Third server side post",
-      content: "This is my second server side post"
-    }
-  ];
+  Post.find().then( documents=>{
+    res.status(200).json({
+      message: 'Posts fetching successfully',
+      posts: documents
+    })
+  }).catch()
 
-  res.status(200).json({
-    message: 'Posts fetching successfully',
-    posts: posts
+
+})
+
+app.delete('/api/posts/:id', (req, res, next)=>{
+  Post.deleteOne({_id: req.params.id}).then((result)=>{
+    console.log(result);
+    res.status(200).json({ message : "Post deleted !"})
   })
 })
 
