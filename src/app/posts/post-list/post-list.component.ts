@@ -1,3 +1,4 @@
+import { templateJitUrl } from '@angular/compiler';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription} from 'rxjs'
 
@@ -11,15 +12,18 @@ import { PostService} from '../post.service'
 })
 export class PostListComponent implements OnInit, OnDestroy {
 
+  isLoading = false
   posts: Post[] = []
   private postSubs: Subscription
 
   constructor(public postService: PostService) { }
 
   ngOnInit(): void {
+    this.isLoading = true
     this.postService.getPosts()
     this.postSubs=this.postService.getPostUpdateListener()
       .subscribe((posts: Post[])=>{
+        this.isLoading = false
         this.posts = posts
       })
   }
